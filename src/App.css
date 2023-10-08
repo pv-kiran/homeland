@@ -1,0 +1,120 @@
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --btn-primary: rgb(104, 104, 176);
+  --shadow-color: rgba(0, 0, 0, .05);
+  --font-primary: rgb(46, 46, 105);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Navigation styling */
+.logo {
+  color: var(--font-primary);
+  font-size: 3rem;
+  flex: 1;
+}
+
+.nav_container {
+  display: flex;
+  padding: 1.5rem;
+  width: 100%;
+  box-shadow: .1rem .1rem 3rem 3rem var(--shadow-color);
+  /* border-bottom: .1rem var(--btn-primary) solid; */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin: auto;
+}
+
+.btn--container {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem;
+  width: 20%;
+}
+
+button {
+  outline: none;
+  border: 0;
+  height: 4rem;
+  border-radius: .5rem;
+  font-size: 1.5rem;
+  padding: .5rem 2.5rem;
+}
+
+.btn--signup , .btn--search {
+  background-color: var(--btn-primary);
+  color: #fff;
+  box-shadow: 1rem .1rem 3rem 1rem var(--shadow-color);
+}
+
+
+/* Hero section styling */
+.hero--section {
+   display: flex;
+   padding-top: 5rem;
+   justify-content: space-between;
+   align-items: center;
+   position: relative;
+   z-index: -1;
+}
+
+.hero--text {
+  height: 100%;
+  padding-left: 11rem;
+}
+.hero--text-main h1{
+  font-size: 5.5rem;
+  text-transform: capitalize;
+}
+.hero--text-sub {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  padding-left: .2rem;
+}
+.hero--text-sub span{
+  font-size: 1.75rem;
+  font-weight: 200;
+}
+
+.hero--banner img {
+  width: 55rem;
+  height: 40rem;
+  display: block;
+  z-index: -1;
+}
+
+/* Seach bar styling */
+.search--section {
+  display: grid;
+  grid-template-columns: repeat(4,1fr) 75px;
+  grid-gap: 2rem;
+  width: 75%;
+  margin: auto;
+  padding: 2rem 2rem;
+  margin-top: -1rem;
+  z-index: 10;
+  border-radius: .5rem;
+  box-shadow: 1rem .3rem 2rem 2rem rgba(0 , 0, 0, .1);
+}
+.btn--search {
+ height: auto;
+ padding: .2rem;
+}
+

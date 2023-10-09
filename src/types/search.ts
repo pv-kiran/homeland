@@ -17,3 +17,11 @@ export type Location = {
   label: string;
   externalID: number;
 };
+
+export type PropertyFilter = {
+  locationExternalID: number;
+  purpose: string;
+  priceMax: number;
+  roomsMin: number;
+  page: number;
+};

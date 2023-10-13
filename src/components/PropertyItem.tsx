@@ -1,17 +1,35 @@
 import Chip from "@mui/material/Chip";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 import CropRotateIcon from "@mui/icons-material/CropRotate";
-// import CropSquareIcon from "@mui/icons-material/CropSquare";
 import { Stack } from "@mui/material";
 import BathroomIcon from "@mui/icons-material/Bathroom";
-function PropertyItem(props) {
+import { Property } from "../types/property";
+import { useNavigate } from "react-router-dom";
+
+function PropertyItem({
+  externalID,
+  coverPhoto,
+  location,
+  price,
+  title,
+  rooms,
+  baths,
+  area,
+}: Property) {
+  // fro navifation purpose
+  const navigate = useNavigate();
+
   return (
     <>
-      <div className="property--card">
-        <img className="property--img" src={props.coverPhoto.url} alt="" />
+      <div
+        className="property--card"
+        onClick={() => {
+          navigate(`/property/${externalID}`);
+        }}>
+        <img className="property--img" src={coverPhoto.url} alt="" />
         <div className="property--info">
           <Chip
-            label={props.location[2]?.name}
+            label={location[2]?.name}
             sx={{
               fontSize: "1.2rem",
               backgroundColor: "#79c98d",
@@ -27,10 +45,10 @@ function PropertyItem(props) {
               color: "white",
               marginBottom: ".5rem",
             }}
-            label={`$ ${props.price}`}
+            label={`$ ${price}`}
           />
         </div>
-        <h2 className="property--title">{props.title}</h2>
+        <h2 className="property--title">{title}</h2>
         <Stack direction="row" spacing={3}>
           <span className="property--info">
             <BedroomParentIcon
@@ -39,7 +57,7 @@ function PropertyItem(props) {
                 marginRight: ".5rem",
                 color: "#6a6075",
               }}></BedroomParentIcon>
-            {props?.rooms}
+            {rooms}
           </span>
           <span className="property--info">
             <BathroomIcon
@@ -48,7 +66,7 @@ function PropertyItem(props) {
                 marginRight: ".5rem",
                 color: "#6a6075",
               }}></BathroomIcon>
-            {props?.baths}
+            {baths}
           </span>
           <span className="property--info">
             <CropRotateIcon
@@ -57,7 +75,7 @@ function PropertyItem(props) {
                 marginRight: ".5rem",
                 color: "#6a6075",
               }}></CropRotateIcon>
-            {`${parseInt(props?.area)} sq ft`}
+            {`${parseInt(area)} sq ft`}
           </span>
         </Stack>
       </div>

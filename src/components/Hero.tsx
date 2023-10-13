@@ -6,8 +6,7 @@ function Hero() {
         <div className="hero--text">
           <div className="hero--text-main">
             <h1>
-              <span style={{ color: "rgb(104, 104, 176)" }}>Rent</span> your
-              dream
+              <span className="hero--text-start">Rent</span> your dream
             </h1>
             <h1>Home with Us.</h1>
           </div>

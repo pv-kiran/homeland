@@ -1,21 +1,17 @@
 import "./App.css";
-import Hero from "./components/Hero";
-import LoadMore from "./components/LoadMore";
-import Navigation from "./components/Navigation";
-import RentalProperty from "./components/RentalProperty";
-import SearchBar from "./components/SearchBar";
-import RentalContext from "./context/RentalContext";
 
+import Navigation from "./components/Navigation";
+import { Route, Routes } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Details from "./pages/Details";
 function App() {
   return (
     <>
       <Navigation></Navigation>
-      <Hero></Hero>
-      <RentalContext>
-        <SearchBar></SearchBar>
-        <RentalProperty></RentalProperty>
-        <LoadMore></LoadMore>
-      </RentalContext>
+      <Routes>
+        <Route path="/" element={<Landing></Landing>}></Route>
+        <Route path="/property/:id" element={<Details></Details>}></Route>
+      </Routes>
     </>
   );
 }

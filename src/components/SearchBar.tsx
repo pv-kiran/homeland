@@ -20,18 +20,18 @@ function SearchBar() {
   // state for location
   const [location, setLocation] = useState<Location[]>([]);
 
+  // for setting the filteration properties
+  const { handleLocationCahnge, applyFilter, loading, filterBy } = useRental();
+
   // fetching the available locations
   const fetchLocations = async (): Promise<void> => {
     const location = await getLocations();
     setLocation(location);
   };
 
-  // for setting the filteration properties
-  const { handleLocationCahnge, applyFilter, loading, filterBy } = useRental();
-
-  useEffect(() => {
-    fetchLocations();
-  }, []);
+  // useEffect(() => {
+  //   fetchLocations();
+  // }, []);
   return (
     <section className="search--section">
       <Autocomplete

@@ -1,6 +1,7 @@
+/* eslint-disable no-useless-catch */
 import { axiosRapidAPIInstance } from "./axiosInstance";
 import { Location, PropertyFilter } from "../types/search";
-import { Property } from "../types/property";
+import { Property, SelectedProperty } from "../types/property";
 
 // call to fetch availble locations
 const getLocations = async (): Promise<Location[]> => {
@@ -18,7 +19,7 @@ const getLocations = async (): Promise<Location[]> => {
   return location;
 };
 
-// call to fetch available properties in a location
+// fetch available properties in a location
 const getProperties = async ({
   locationExternalID,
   purpose,
@@ -27,38 +28,85 @@ const getProperties = async ({
   page,
 }: PropertyFilter): Promise<Property[]> => {
   // fetching the properties
-  const { data } = await axiosRapidAPIInstance.get(
-    `/properties/list?locationExternalIDs=${
-      locationExternalID ? locationExternalID : 5002
-    }${purpose ? `&purpose=${purpose}` : ""}${
-      priceMax ? `&priceMax=${priceMax}` : ""
-    }${roomsMin ? `&roomsMin=${roomsMin}` : ""}&hitsPerPage=9&page=${page}`
-  );
+  try {
+    const { data } = await axiosRapidAPIInstance.get(
+      `/properties/list?locationExternalIDs=${
+        locationExternalID ? locationExternalID : 5002
+      }${purpose ? `&purpose=${purpose}` : ""}${
+        priceMax ? `&priceMax=${priceMax}` : ""
+      }${roomsMin ? `&roomsMin=${roomsMin}` : ""}&hitsPerPage=9&page=${page}`
+    );
 
-  console.log(locationExternalID, purpose, priceMax, roomsMin, page);
-  const property = data?.hits.map((item) => {
-    return {
-      price: item?.price,
-      title: item?.title,
-      area: item?.area,
-      phoneNumber: item?.phoneNumber,
-      contactName: item?.contactName,
-      amenities: item?.amenities,
-      location: item?.location,
-      coverPhoto: item?.coverPhoto,
-      rooms: item?.rooms,
-      baths: item?.baths,
-    };
-  });
-  return property;
+    const properties = data?.hits.map((item) => {
+      return {
+        price: item?.price,
+        title: item?.title,
+        externalID: item?.externalID,
+        area: item?.area,
+        coverPhoto: item?.coverPhoto,
+        rooms: item?.rooms,
+        baths: item?.baths,
+        location: item?.location,
+      };
+    });
+    return properties;
+  } catch (err) {
+    throw err;
+  }
 };
 
-export { getLocations, getProperties };
+// fetch details of a property
+const getPropertyDetails = async (
+  externalId: string
+): Promise<SelectedProperty> => {
+  const { data } = await axiosRapidAPIInstance.get(
+    `properties/detail?externalID=${externalId}`
+  );
+  console.log(externalId);
+  console.log(data);
+  const {
+    price,
+    externalID,
+    title,
+    area,
+    coverPhoto,
+    baths,
+    rooms,
+    agency,
+    amenities,
+    category,
+    contactName,
+    createdAt,
+    description,
+    furnishingStatus,
+    geography,
+    location,
+    rentFrequency,
+    phoneNumber,
+    photos,
+  } = data;
 
-// location -  locationExternalID (required) , purpose - (purpose) -  , price (priceMax) , room (roomsMax)
+  return {
+    price,
+    externalID,
+    title,
+    area,
+    coverPhoto,
+    baths,
+    rooms,
+    agency,
+    amenities,
+    category,
+    contactName,
+    createdAt,
+    description,
+    furnishingStatus,
+    rentFrequency,
+    geography,
+    location,
+    phoneNumber,
+    photos,
+  };
+};
 
-// await instance.get(
-//   `patient/doctors/all?skip=${skip}&limit=${limit}${
-//     speciality ? `&specialities=${[speciality]}` : ""
-//   }${doctorName ? `&doctorName=${doctorName}` : ""}`
-// );
+export { getLocations, getProperties, getPropertyDetails };

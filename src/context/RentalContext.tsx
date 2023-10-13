@@ -18,6 +18,7 @@ type RentalContext = {
   applyFilter: () => void;
   filterBy: PropertyFilter;
   loading: boolean;
+  isError: boolean;
   loadMore: () => void;
 };
 
@@ -48,15 +49,22 @@ function RentalContext({ children }: Props) {
 
   // state for loading while fetching data
   const [loading, setLoading] = useState<boolean>(false);
+  // state for handling error
+  const [isError, setIsError] = useState<boolean>(false);
 
   // fething the properties
   const fetchProperties = async (
     filterParams: PropertyFilter
   ): Promise<void> => {
-    setLoading(true);
-    const properties = await getProperties(filterParams);
-    setProperties(properties);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const properties = await getProperties(filterParams);
+      setProperties(properties);
+      setLoading(false);
+    } catch (err) {
+      setIsError(true);
+      setLoading(false);
+    }
   };
 
   // handling pagination
@@ -122,6 +130,7 @@ function RentalContext({ children }: Props) {
         filterBy,
         loading,
         loadMore,
+        isError,
       }}>
       {children}
     </rentalContext.Provider>

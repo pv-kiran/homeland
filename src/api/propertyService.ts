@@ -59,54 +59,60 @@ const getProperties = async ({
 const getPropertyDetails = async (
   externalId: string
 ): Promise<SelectedProperty> => {
-  const { data } = await axiosRapidAPIInstance.get(
-    `properties/detail?externalID=${externalId}`
-  );
-  console.log(externalId);
-  console.log(data);
-  const {
-    price,
-    externalID,
-    title,
-    area,
-    coverPhoto,
-    baths,
-    rooms,
-    agency,
-    amenities,
-    category,
-    contactName,
-    createdAt,
-    description,
-    furnishingStatus,
-    geography,
-    location,
-    rentFrequency,
-    phoneNumber,
-    photos,
-  } = data;
+  try {
+    const { data } = await axiosRapidAPIInstance.get(
+      `properties/detail?externalID=${externalId}`
+    );
+    const {
+      price,
+      externalID,
+      title,
+      area,
+      coverPhoto,
+      baths,
+      rooms,
+      agency,
+      amenities,
+      category,
+      contactName,
+      createdAt,
+      description,
+      furnishingStatus,
+      geography,
+      location,
+      rentFrequency,
+      phoneNumber,
+      photos,
+    } = data;
 
-  return {
-    price,
-    externalID,
-    title,
-    area,
-    coverPhoto,
-    baths,
-    rooms,
-    agency,
-    amenities,
-    category,
-    contactName,
-    createdAt,
-    description,
-    furnishingStatus,
-    rentFrequency,
-    geography,
-    location,
-    phoneNumber,
-    photos,
-  };
+    if (!title || !photos || !geography) {
+      throw new Error("No property found");
+    }
+
+    return {
+      price,
+      externalID,
+      title,
+      area,
+      coverPhoto,
+      baths,
+      rooms,
+      agency,
+      amenities,
+      category,
+      contactName,
+      createdAt,
+      description,
+      furnishingStatus,
+      rentFrequency,
+      geography,
+      location,
+      phoneNumber,
+      photos,
+    };
+  } catch (err) {
+    throw err;
+  }
 };
 
 export { getLocations, getProperties, getPropertyDetails };

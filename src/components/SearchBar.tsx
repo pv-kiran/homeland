@@ -1,6 +1,5 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import CircularProgress from "@mui/material/CircularProgress";
 import SearchIcon from "@mui/icons-material/Search";
 
 // input array for the select element
@@ -61,21 +60,12 @@ function SearchBar() {
         name={"roomsMin"}
         searchInput={roomInput}
         value={filterBy.roomsMin}></Selector>
-      {loading ? (
-        <CircularProgress
-          color="primary"
-          sx={{
-            height: "2.5rem",
-            width: "2.5rem",
-            marginTop: "12%",
-            marginLeft: ".5rem",
-          }}
-          size=""></CircularProgress>
-      ) : (
-        <button className="btn--search" onClick={() => applyFilter()}>
-          <SearchIcon sx={{ fontSize: "1.75rem" }} />
-        </button>
-      )}
+      <button
+        className="btn--search"
+        onClick={() => applyFilter()}
+        disabled={loading}>
+        <SearchIcon sx={{ fontSize: "1.75rem" }} />
+      </button>
     </section>
   );
 }

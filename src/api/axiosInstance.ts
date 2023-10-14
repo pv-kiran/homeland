@@ -7,7 +7,7 @@ export const axiosRapidAPIInstance: AxiosInstance = axios.create({
 axiosRapidAPIInstance.interceptors.request.use(
   (request) => {
     request.headers["X-RapidAPI-Key"] =
-      "f8685c8d8cmsh14b744eb92d18adp16b28djsn9c51006ac44";
+      "f8685c8d8cmsh14b744eb92d18adp16b28djsn9c51006ac44f";
     request.headers["X-RapidAPI-Host"] = `bayut.p.rapidapi.com`;
 
     return request;

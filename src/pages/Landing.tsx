@@ -1,5 +1,4 @@
 import Hero from "../components/Hero";
-import LoadMore from "../components/LoadMore";
 import RentalProperty from "../components/RentalProperty";
 import SearchBar from "../components/SearchBar";
 import RentalContext from "../context/RentalContext";
@@ -11,7 +10,6 @@ function Landing() {
       <RentalContext>
         <SearchBar></SearchBar>
         <RentalProperty></RentalProperty>
-        <LoadMore></LoadMore>
       </RentalContext>
     </>
   );

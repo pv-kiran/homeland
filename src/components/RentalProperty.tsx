@@ -2,16 +2,14 @@
 
 import { useRental } from "../context/RentalContext";
 import PropertyItem from "./PropertyItem";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function RentalProperty() {
-  // const propeties = JSON.parse(JSON.stringify(data));
-  // console.log(propeties);
-  const { properties, isError } = useRental();
+  const { properties, isError, loadMore, loading } = useRental();
 
   if (isError) {
     return (
-      <div
-        style={{ textAlign: "center", fontSize: "2.5rem", margin: "1rem 0" }}>
+      <div className="error--text">
         No data avialable at the moment.. Try after sometimes ..!!
       </div>
     );
@@ -24,6 +22,24 @@ function RentalProperty() {
           return <PropertyItem key={index} {...item}></PropertyItem>;
         })}
       </div>
+      {loading ? (
+        <CircularProgress
+          color="primary"
+          sx={{
+            height: "2.5rem",
+            width: "2.5rem",
+            margin: "auto",
+            display: "block",
+            marginBottom: "1rem",
+          }}
+          size=""></CircularProgress>
+      ) : (
+        properties.length >= 9 && (
+          <button className="btn--load" onClick={() => loadMore()}>
+            Load More
+          </button>
+        )
+      )}
     </>
   );
 }

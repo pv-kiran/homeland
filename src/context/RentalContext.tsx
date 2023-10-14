@@ -51,6 +51,7 @@ function RentalContext({ children }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
   // state for handling error
   const [isError, setIsError] = useState<boolean>(false);
+  // state for initial fetching - for skeleton loading implementation
 
   // fething the properties
   const fetchProperties = async (
@@ -61,7 +62,9 @@ function RentalContext({ children }: Props) {
       const properties = await getProperties(filterParams);
       setProperties(properties);
       setLoading(false);
+      setIsError(false);
     } catch (err) {
+      // incase of error
       setIsError(true);
       setLoading(false);
     }
@@ -71,12 +74,17 @@ function RentalContext({ children }: Props) {
   const fetchMoreProperties = async (
     filterParams: PropertyFilter
   ): Promise<void> => {
-    setLoading(true);
-    const properties = await getProperties(filterParams);
-    setProperties((prev) => {
-      return [...prev, ...properties];
-    });
-    setLoading(false);
+    try {
+      setLoading(true);
+      const properties = await getProperties(filterParams);
+      setProperties((prev) => {
+        return [...prev, ...properties];
+      });
+      setLoading(false);
+    } catch (err) {
+      setIsError(true);
+      setLoading(false);
+    }
   };
 
   // handling of filtering porperties - price , rooms and purpose
@@ -115,9 +123,8 @@ function RentalContext({ children }: Props) {
 
   // fetching properties on initial rendering of pages
   useEffect(() => {
-    setLoading(true);
+    console.log("Hello");
     fetchProperties(filterBy);
-    setLoading(false);
   }, []);
 
   return (

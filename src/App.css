@@ -54,6 +54,7 @@ button {
   border-radius: .5rem;
   font-size: 1.5rem;
   padding: .5rem 2.5rem;
+  cursor: pointer;
 }
 
 .btn--signup , .btn--search {
@@ -279,6 +280,13 @@ button {
 .btn--submit {
   width: 100%;
 }
+
+.error--text {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 1.5rem 0;
+}
+
 
 @media screen and (max-width:820px) {
   .btn--container {

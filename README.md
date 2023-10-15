@@ -21,26 +21,23 @@ To get started with HomeLand, follow these steps:
 1. **Clone the Repository**: Clone this repository to your local machine using Git:
 
    ```shell
-   git clone https://github.com/yourusername/homeland.git
+   git clone https://github.com/pv-kiran/homeland.git
    
-2. **Clone the Repository**: Clone this repository to your local machine using Git:
-
-   ```shell
-   git clone https://github.com/yourusername/homeland.git
-   
-3. **Install Dependencies**: 
+2. **Install Dependencies**: 
 
    ```shell
    npm install
 
-4.  **Navigate to project directory**: 
+3. **Navigate to project directory**: 
 
    ```shell
    cd homeland
 
-5.  **Start the Development Server**: 
+3.  **Start the developement server**: 
 
    ```shell
-  npm run dev
+   npm run dev
+
+
 
 

@@ -2,6 +2,7 @@
 import { axiosRapidAPIInstance } from "./axiosInstance";
 import { Location, PropertyFilter } from "../types/search";
 import { Property, SelectedProperty } from "../types/property";
+import { PropertyItem } from "../types/propertyItem";
 
 // call to fetch availble locations
 const getLocations = async (): Promise<Location[]> => {
@@ -43,7 +44,7 @@ const getProperties = async ({
       }&hitsPerPage=9&page=${page}&roomsMin=${roomsMax}`
     );
 
-    const properties = data?.hits.map((item) => {
+    const properties = data?.hits.map((item: PropertyItem) => {
       return {
         price: item?.price,
         title: item?.title,

@@ -61,7 +61,7 @@ function SearchBar() {
         searchInput={
           filterBy?.purpose === "for-rent" ? priceRentInput : priceSaleInput
         }
-        value={filterBy.priceMax}></Selector>
+        value={filterBy?.priceMax}></Selector>
       <Selector
         title={"Number of Rooms"}
         name={"roomsMax"}

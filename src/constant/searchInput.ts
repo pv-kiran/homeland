@@ -1,18 +1,18 @@
 import { Price, Room, Purpose } from "../types/search";
 
 const priceRentInput: Price[] = [
-  { title: "Less than 8000", value: 8000 },
-  { title: "Less than 10000", value: 10000 },
-  { title: "Less than 13000", value: 13000 },
-  { title: "Less than 15000", value: 15000 },
+  { title: "Between 6000 - 8000", value: 8000 },
+  { title: "Between 8000 - 10000", value: 10000 },
+  { title: "Between 10000 - 12000", value: 12000 },
+  { title: "Between 12000 - 14000", value: 15000 },
 ];
 
 const priceSaleInput: Price[] = [
-  { title: "Less than 8000", value: 8000 },
-  { title: "Less than 2000000", value: 2000000 },
-  { title: "Less than 3000000", value: 3000000 },
-  { title: "Less than 4000000", value: 4000000 },
-  { title: "Less than 5000000", value: 5000000 },
+  { title: "Between 6000 - 8000", value: 8000 },
+  { title: "Between 1000000 - 2000000", value: 2000000 },
+  { title: "Between 2000000 - 3000000", value: 3000000 },
+  { title: "Between 3000000 - 4000000", value: 4000000 },
+  { title: "Between 4000000 - 5000000", value: 5000000 },
 ];
 
 const roomInput: Room[] = [

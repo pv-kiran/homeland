@@ -41,7 +41,9 @@ const getProperties = async ({
         priceMax ? `&priceMax=${priceMax}` : ""
       }${
         roomsMax ? `&roomsMax=${roomsMax}` : ""
-      }&hitsPerPage=9&page=${page}&roomsMin=${roomsMax}`
+      }&hitsPerPage=9&page=${page}&roomsMin=${roomsMax}&priceMin=${
+        priceMax <= 14000 ? priceMax - 2000 : priceMax - 1000000
+      }`
     );
 
     const properties = data?.hits.map((item: PropertyItem) => {

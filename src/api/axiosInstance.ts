@@ -18,7 +18,12 @@ axiosRapidAPIInstance.interceptors.request.use(
 
 axiosRapidAPIInstance.interceptors.response.use(
   (response) => {
-    if (response.status === 204 || response.data.hits.length === 0) {
+    // there is no detials found for a selected property
+    if (response?.data === "") {
+      throw new Error("No data found");
+    }
+    // there is no property found for a selected location
+    else if (response?.data != "" && response?.data?.hits?.length === 0) {
       throw new Error("No data found");
     }
     return response;

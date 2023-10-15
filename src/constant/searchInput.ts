@@ -4,7 +4,7 @@ const priceRentInput: Price[] = [
   { title: "Between 6000 - 8000", value: 8000 },
   { title: "Between 8000 - 10000", value: 10000 },
   { title: "Between 10000 - 12000", value: 12000 },
-  { title: "Between 12000 - 14000", value: 15000 },
+  { title: "Between 12000 - 14000", value: 14000 },
 ];
 
 const priceSaleInput: Price[] = [

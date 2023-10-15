@@ -1,7 +1,13 @@
+import Navigation from "../components/Navigation";
 import PropertyDetails from "../components/PropertyDetails";
 
 function Details() {
-  return <PropertyDetails></PropertyDetails>;
+  return (
+    <>
+      <Navigation />
+      <PropertyDetails />
+    </>
+  );
 }
 
 export default Details;

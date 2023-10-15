@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import { Agency } from "./../types/property";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   agency: Agency;
@@ -7,9 +8,14 @@ interface Props {
 }
 
 function ContactForm({ agency, contactName }: Props) {
+  const navigate = useNavigate();
   return (
     <div className="property--information-contact">
-      <form className="contact--form">
+      <form
+        className="contact--form"
+        onSubmit={() => {
+          navigate("/submission/success");
+        }}>
         <div
           style={{
             display: "flex",
@@ -40,18 +46,21 @@ function ContactForm({ agency, contactName }: Props) {
           id="outlined-basic"
           label="Name"
           variant="outlined"
+          required
         />
         <TextField
           sx={{ width: "100%", marginBottom: "1.5rem" }}
           id="outlined-basic"
           label="Email"
           variant="outlined"
+          required
         />
         <TextField
           sx={{ width: "100%", marginBottom: "1.5rem" }}
           id="outlined-basic"
           label="Phone"
           variant="outlined"
+          required
         />
         <textarea
           style={{
@@ -62,8 +71,11 @@ function ContactForm({ agency, contactName }: Props) {
             borderRadius: ".5rem",
           }}
           rows={6}
+          required
           placeholder="I am interested in this property"></textarea>
-        <button className="btn--signup btn--submit">Send</button>
+        <button className="btn--signup btn--submit" type="submit">
+          Send
+        </button>
       </form>
     </div>
   );

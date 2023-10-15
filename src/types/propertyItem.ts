@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface PropertyItem {
   _geoloc: Geo;
   _highlightResult: HighlightResult;

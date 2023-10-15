@@ -93,6 +93,7 @@ const getPropertyDetails = async (
       photos,
     } = data;
 
+    //
     if (!title || !photos || !geography) {
       throw new Error("No property found");
     }

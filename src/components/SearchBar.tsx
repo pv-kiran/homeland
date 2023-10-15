@@ -21,7 +21,12 @@ function SearchBar() {
   const [location, setLocation] = useState<Location[]>([]);
 
   // for setting the filteration properties
-  const { handleLocationCahnge, applyFilter, loading, filterBy } = useRental();
+  const {
+    handleLocationCahnge: handleLocationChange,
+    applyFilter,
+    loading,
+    filterBy,
+  } = useRental();
 
   // fetching the available locations
   const fetchLocations = async (): Promise<void> => {
@@ -37,11 +42,12 @@ function SearchBar() {
       <Autocomplete
         id="combo-box-demo"
         options={location}
+        defaultValue={{ label: "Dubai", externalID: 5002 }}
         onChange={(_e, newValue) => {
-          handleLocationCahnge(Number(newValue?.externalID));
+          handleLocationChange(Number(newValue?.externalID));
         }}
         renderInput={(params) => (
-          <TextField {...params} label="Location" variant="filled" />
+          <TextField {...params} label="Choose a Location" variant="filled" />
         )}
       />
       <Selector

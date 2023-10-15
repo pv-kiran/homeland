@@ -15,3 +15,16 @@ axiosRapidAPIInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+axiosRapidAPIInstance.interceptors.response.use(
+  (response) => {
+    if (response.status === 204 || response.data.hits.length === 0) {
+      throw new Error("No data found");
+    }
+    return response;
+  },
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  }
+);

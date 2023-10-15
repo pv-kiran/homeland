@@ -41,7 +41,7 @@ function RentalContext({ children }: Props) {
   // state for filteration handling
   const [filterBy, setFilterBy] = useState<PropertyFilter>({
     locationExternalID: 5002,
-    roomsMin: 1,
+    roomsMax: 1,
     priceMax: 8000,
     purpose: "for-rent",
     page: 1,
@@ -123,7 +123,6 @@ function RentalContext({ children }: Props) {
 
   // fetching properties on initial rendering of pages
   useEffect(() => {
-    console.log("Hello");
     fetchProperties(filterBy);
   }, []);
 

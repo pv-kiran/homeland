@@ -22,6 +22,6 @@ export type PropertyFilter = {
   locationExternalID: number;
   purpose: string;
   priceMax: number;
-  roomsMin: number;
+  roomsMax: number;
   page: number;
 };

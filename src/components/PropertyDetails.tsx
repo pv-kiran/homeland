@@ -13,17 +13,14 @@ import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import PhoneIcon from "@mui/icons-material/Phone";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import TextField from "@mui/material/TextField";
-// import Swiper core and required modules
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
 import PropertyDetailsInfo from "./PropertyDetailsInfo";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { SelectedProperty } from "../types/property";
+
+import NotFound from "./NotFound";
+import ImageSlider from "./ImageSlider";
+import ContactForm from "./ContactForm";
+import MapView from "./MapView";
 
 function PropertyDetails() {
   const { id } = useParams();
@@ -68,11 +65,7 @@ function PropertyDetails() {
   }, []);
 
   if (error) {
-    return (
-      <div className="error--text">
-        No data avialable at the moment.. Try after sometimes ..!!
-      </div>
-    );
+    return <NotFound />;
   }
   return (
     <>
@@ -90,29 +83,7 @@ function PropertyDetails() {
       ) : (
         <main className="details">
           <section className="details--container">
-            <div className="details--photos">
-              <Swiper
-                // install Swiper modules
-                modules={[Navigation]}
-                spaceBetween={0}
-                slidesPerView={1}
-                style={{
-                  borderRadius: ".5rem",
-                }}
-                navigation>
-                {property?.photos?.map((item, index) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <img
-                        className="details--img"
-                        src={item.url}
-                        alt="no images"
-                      />
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </div>
+            <ImageSlider photos={property?.photos} />
             <div className="details--info">
               <Stack
                 direction={{
@@ -131,9 +102,15 @@ function PropertyDetails() {
                 />
                 <PropertyDetailsInfo
                   Icon={CurrencyExchangeIcon}
-                  title={"Rent"}
+                  title={`${
+                    property.purpose === "for-rent" ? "Rent" : "Price"
+                  }`}
                   infoValue={`$ ${property?.price}`}
-                  infoDescription={`${property?.rentFrequency}`}
+                  infoDescription={`${
+                    property.purpose === "for-rent"
+                      ? property.rentFrequency
+                      : ""
+                  }`}
                 />
               </Stack>
               <Stack
@@ -245,85 +222,16 @@ function PropertyDetails() {
             <div className="property--information">
               <div className="property---information-map">
                 {property?.geography && (
-                  <MapContainer
-                    center={[
-                      property?.geography?.lat,
-                      property?.geography?.lng,
-                    ]}
-                    zoom={3}
-                    scrollWheelZoom={false}>
-                    <TileLayer
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker
-                      position={[
-                        property?.geography?.lat,
-                        property?.geography?.lng,
-                      ]}>
-                      <Popup>{fullAddress}</Popup>
-                    </Marker>
-                  </MapContainer>
+                  <MapView
+                    geography={property?.geography}
+                    fullAddress={fullAddress}
+                  />
                 )}
               </div>
-              <div className="property--information-contact">
-                <form className="contact--form">
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginBottom: "2rem",
-                    }}>
-                    <img
-                      style={{
-                        width: "5rem",
-                        objectFit: "cover",
-                        marginRight: "2rem",
-                      }}
-                      src={property?.agency?.logo?.url}
-                      alt="agency-log"
-                    />
-                    <div>
-                      <h3 style={{ fontSize: "1.4rem", fontWeight: "400" }}>
-                        {property?.contactName}
-                      </h3>
-                      <h5 style={{ fontSize: "1.2rem", fontWeight: "200" }}>
-                        {property?.agency?.name}
-                      </h5>
-                    </div>
-                  </div>
-                  <TextField
-                    sx={{ width: "100%", marginBottom: "1.5rem" }}
-                    id="outlined-basic"
-                    label="Name"
-                    variant="outlined"
-                  />
-                  <TextField
-                    sx={{ width: "100%", marginBottom: "1.5rem" }}
-                    id="outlined-basic"
-                    label="Email"
-                    variant="outlined"
-                  />
-                  <TextField
-                    sx={{ width: "100%", marginBottom: "1.5rem" }}
-                    id="outlined-basic"
-                    label="Phone"
-                    variant="outlined"
-                  />
-                  <textarea
-                    style={{
-                      width: "100%",
-                      padding: "1.3rem",
-                      marginBottom: "1.5rem",
-                      border: "1px dotted gray",
-                      borderRadius: ".5rem",
-                    }}
-                    rows={6}
-                    placeholder="I am interested in this property"></textarea>
-                  <button className="btn--signup btn--submit">Send</button>
-                </form>
-              </div>
+              <ContactForm
+                agency={property?.agency}
+                contactName={property.contactName}
+              />
             </div>
           </section>
         </main>

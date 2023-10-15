@@ -5,18 +5,22 @@ import { Property, SelectedProperty } from "../types/property";
 
 // call to fetch availble locations
 const getLocations = async (): Promise<Location[]> => {
-  const { data } = await axiosRapidAPIInstance.get(
-    `/auto-complete?query=${"uae"}`
-  );
-  const location = data?.hits.map(
-    (item: { name: string; externalID: number }) => {
-      return {
-        label: item?.name,
-        externalID: item?.externalID,
-      };
-    }
-  );
-  return location;
+  try {
+    const { data } = await axiosRapidAPIInstance.get(
+      `/auto-complete?query=${"uae"}`
+    );
+    const location = data?.hits.map(
+      (item: { name: string; externalID: number }) => {
+        return {
+          label: item?.name,
+          externalID: item?.externalID,
+        };
+      }
+    );
+    return location;
+  } catch (err) {
+    throw err;
+  }
 };
 
 // fetch available properties in a location
@@ -24,7 +28,7 @@ const getProperties = async ({
   locationExternalID,
   purpose,
   priceMax,
-  roomsMin,
+  roomsMax,
   page,
 }: PropertyFilter): Promise<Property[]> => {
   // fetching the properties
@@ -34,7 +38,9 @@ const getProperties = async ({
         locationExternalID ? locationExternalID : 5002
       }${purpose ? `&purpose=${purpose}` : ""}${
         priceMax ? `&priceMax=${priceMax}` : ""
-      }${roomsMin ? `&roomsMin=${roomsMin}` : ""}&hitsPerPage=9&page=${page}`
+      }${
+        roomsMax ? `&roomsMax=${roomsMax}` : ""
+      }&hitsPerPage=9&page=${page}&roomsMin=${roomsMax}`
     );
 
     const properties = data?.hits.map((item) => {
@@ -81,6 +87,7 @@ const getPropertyDetails = async (
       geography,
       location,
       rentFrequency,
+      purpose,
       phoneNumber,
       photos,
     } = data;
@@ -104,6 +111,7 @@ const getPropertyDetails = async (
       createdAt,
       description,
       furnishingStatus,
+      purpose,
       rentFrequency,
       geography,
       location,

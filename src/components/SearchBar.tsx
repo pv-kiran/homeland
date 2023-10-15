@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // input array for the select element
 import Selector from "./Selector";
@@ -28,9 +29,9 @@ function SearchBar() {
     setLocation(location);
   };
 
-  // useEffect(() => {
-  //   fetchLocations();
-  // }, []);
+  useEffect(() => {
+    fetchLocations();
+  }, []);
   return (
     <section className="search--section">
       <Autocomplete
@@ -47,24 +48,30 @@ function SearchBar() {
         title={"Purpose"}
         name={"purpose"}
         searchInput={purposeInput}
-        value={filterBy.purpose}></Selector>
+        value={filterBy?.purpose}></Selector>
       <Selector
         title={"Price"}
         name={"priceMax"}
         searchInput={
-          filterBy.purpose === "for-rent" ? priceRentInput : priceSaleInput
+          filterBy?.purpose === "for-rent" ? priceRentInput : priceSaleInput
         }
         value={filterBy.priceMax}></Selector>
       <Selector
-        title={"Minimum Rooms"}
-        name={"roomsMin"}
+        title={"Number of Rooms"}
+        name={"roomsMax"}
         searchInput={roomInput}
-        value={filterBy.roomsMin}></Selector>
+        value={filterBy?.roomsMax}></Selector>
       <button
         className="btn--search"
         onClick={() => applyFilter()}
         disabled={loading}>
-        <SearchIcon sx={{ fontSize: "1.75rem" }} />
+        {loading ? (
+          <CircularProgress
+            style={{ width: "2rem", height: "2rem", color: "#fff" }}
+          />
+        ) : (
+          <SearchIcon sx={{ fontSize: "1.75rem" }} />
+        )}
       </button>
     </section>
   );

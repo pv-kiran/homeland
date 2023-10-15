@@ -18,13 +18,14 @@ export interface SelectedProperty extends Property {
   createdAt: number;
   description: string;
   rentFrequency: string;
+  purpose: string;
   furnishingStatus: string;
   geography: Geography;
   phoneNumber: PhoneNumber;
   photos: Photo[];
 }
 
-interface Agency {
+export interface Agency {
   active: boolean;
   commercialNumber: null;
   createdAt: Date;
@@ -100,7 +101,7 @@ interface Category {
   slug_l3: string;
 }
 
-interface Geography {
+export interface Geography {
   lat: number;
   lng: number;
 }
@@ -128,7 +129,7 @@ interface PhoneNumber {
   whatsapp: string;
 }
 
-interface Photo {
+export interface Photo {
   externalID: string;
   id: number;
   main: boolean;

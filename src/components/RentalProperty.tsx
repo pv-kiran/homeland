@@ -1,6 +1,7 @@
 // import { useRental } from "../context/RentalContext";
 
 import { useRental } from "../context/RentalContext";
+import NotFound from "./NotFound";
 import PropertyItem from "./PropertyItem";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -8,11 +9,7 @@ function RentalProperty() {
   const { properties, isError, loadMore, loading } = useRental();
 
   if (isError) {
-    return (
-      <div className="error--text">
-        No data avialable at the moment.. Try after sometimes ..!!
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (

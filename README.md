@@ -37,7 +37,3 @@ To get started with HomeLand, follow these steps:
 
    ```shell
    npm run dev
-
-
-
-

@@ -1,27 +1,46 @@
-# React + TypeScript + Vite
+# HomeLand
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HomeLand is a web application built with React, TypeScript, and Vite that simplifies the process of finding your perfect rental home in the UAE. Whether you're a tenant or an owner, HomeLand provides an easy and efficient way to navigate the real estate market.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Display Rental Homes**: HomeLand allows you to browse and view a wide range of rental homes, making it easy to find the one that suits your needs.
 
-## Expanding the ESLint configuration
+- **Filtering**: We understand that you have specific requirements for your dream home. HomeLand lets you filter properties by location, price, and the number of rooms, ensuring you find the ideal rental that matches your criteria.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Single Detailed View**: Dive deeper into the property of your choice with a single detailed view. See all the information you need to make an informed decision.
 
-- Configure the top-level `parserOptions` property like this:
+- **Google Map Integration**: Get a visual representation of the property's location with Google Maps. See what's nearby and ensure it's in the right spot for you.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- **Image Slideshow**: Explore every angle of the property with image slideshows. Get a vivid sense of the space and style.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+To get started with HomeLand, follow these steps:
+
+1. **Clone the Repository**: Clone this repository to your local machine using Git:
+
+   ```shell
+   git clone https://github.com/yourusername/homeland.git
+   
+2. **Clone the Repository**: Clone this repository to your local machine using Git:
+
+   ```shell
+   git clone https://github.com/yourusername/homeland.git
+   
+3. **Install Dependencies**: 
+
+   ```shell
+   npm install
+
+4.  **Navigate to project directory**: 
+
+   ```shell
+   cd homeland
+
+5.  **Start the Development Server**: 
+
+   ```shell
+  npm run dev
+
+

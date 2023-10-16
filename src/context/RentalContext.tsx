@@ -9,6 +9,7 @@ import { getProperties } from "../api/propertyService";
 import { Property } from "../types/property";
 import { PropertyFilter } from "../types/search";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { globalLoadingConfig } from "../api/axiosInstance";
 
 // type for the context
 type RentalContext = {
@@ -53,20 +54,19 @@ function RentalContext({ children }: Props) {
   const [isError, setIsError] = useState<boolean>(false);
   // state for initial fetching - for skeleton loading implementation
 
+  globalLoadingConfig(setLoading);
+
   // fething the properties
   const fetchProperties = async (
     filterParams: PropertyFilter
   ): Promise<void> => {
     try {
-      setLoading(true);
       const properties = await getProperties(filterParams);
       setProperties(properties);
-      setLoading(false);
       setIsError(false);
     } catch (err) {
       // incase of error
       setIsError(true);
-      setLoading(false);
     }
   };
 
@@ -75,15 +75,12 @@ function RentalContext({ children }: Props) {
     filterParams: PropertyFilter
   ): Promise<void> => {
     try {
-      setLoading(true);
       const properties = await getProperties(filterParams);
       setProperties((prev) => {
         return [...prev, ...properties];
       });
-      setLoading(false);
     } catch (err) {
       setIsError(true);
-      setLoading(false);
     }
   };
 
